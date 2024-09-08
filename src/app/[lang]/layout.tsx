@@ -5,6 +5,8 @@ import Navigation from '../components/Navigation'
 import { getDictionary } from '../dictionaries'
 import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from '../config'
 import { redirect } from 'next/navigation'
+import { DefaultSeo } from 'next-seo';
+import SEO from '../seo-config';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,7 +25,6 @@ export default async function RootLayout({
     children: React.ReactNode
     params: { lang: string }
 }) {
-    // Redirect to default language if the requested language is not supported
     if (!SUPPORTED_LANGUAGES.includes(params.lang)) {
         redirect(`/${DEFAULT_LANGUAGE}`);
     }
@@ -33,6 +34,7 @@ export default async function RootLayout({
     return (
         <html lang={params.lang}>
             <body className={inter.className}>
+                <DefaultSeo {...SEO} />
                 <Navigation lang={params.lang} dict={{ home: dict.home, search: dict.searchButton, registerConcierge: dict.registerButton }} />
                 {children}
             </body>
