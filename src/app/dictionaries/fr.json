@@ -30,5 +30,10 @@
     "registerConcierge": "Inscrire Concierge",
     "viewContact": "Voir Contact",
     "registerConciergeTitle": "S'inscrire comme Concierge",
-    "registerConciergeDescription": "Remplissez le formulaire ci-dessous pour vous inscrire en tant que concierge."
+    "registerConciergeDescription": "Remplissez le formulaire ci-dessous pour vous inscrire en tant que concierge.",
+    "conciergerieIn": "Services de Conciergerie à",
+    "servicesForAirbnb": "Services pour Airbnb et Locations Courte Durée",
+    "findBestConciergeService": "Trouvez le meilleur service de conciergerie à",
+    "forYourAirbnb": "pour votre Airbnb ou location courte durée",
+    "discoverBestConciergeServices": "Découvrez les meilleurs services de conciergerie à"
 }

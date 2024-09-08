@@ -33,6 +33,11 @@ export type Dictionary = {
     descriptionPlaceholder: string
     loading: string
     noResults: string
+    conciergerieIn: string
+    servicesForAirbnb: string
+    findBestConciergeService: string
+    forYourAirbnb: string
+    discoverBestConciergeServices: string
 }
 
 const dictionaries = {

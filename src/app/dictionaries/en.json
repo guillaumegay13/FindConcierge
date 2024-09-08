@@ -30,5 +30,10 @@
     "registerConcierge": "Register Concierge",
     "viewContact": "View Contact",
     "registerConciergeTitle": "Register as a Concierge",
-    "registerConciergeDescription": "Fill in the form below to register as a concierge."
+    "registerConciergeDescription": "Fill in the form below to register as a concierge.",
+    "conciergerieIn": "Concierge Services in",
+    "servicesForAirbnb": "Services for Airbnb and Short-Term Rentals",
+    "findBestConciergeService": "Find the best concierge service in",
+    "forYourAirbnb": "for your Airbnb or short-term rental",
+    "discoverBestConciergeServices": "Discover the best concierge services in"
 }
