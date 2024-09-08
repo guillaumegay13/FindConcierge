@@ -15,6 +15,11 @@ export type Dictionary = {
     home: string
     location: string
     services: string
+    conciergeProfileTitle: string
+    saveProfile: string
+    profile: string
+    registerConcierge: string
+    viewContact: string
 }
 
 const dictionaries = {

@@ -22,5 +22,11 @@
     "descriptionPlaceholder": "Business Description",
     "genericError": "An error occurred. Please check your information and try again.",
     "networkError": "Connection error. Please check your internet connection and try again.",
-    "methodNotAllowed": "The server does not support this operation. Please contact support."
+    "methodNotAllowed": "The server does not support this operation. Please contact support.",
+    "conciergeProfileTitle": "Concierge Profile",
+    "saveProfile": "Save Profile",
+    "profile": "Profile",
+    "conciergeRegisterTitle": "Register as a Concierge",
+    "registerConcierge": "Register Concierge",
+    "viewContact": "View Contact"
 }

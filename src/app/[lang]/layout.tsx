@@ -33,7 +33,7 @@ export default async function RootLayout({
     return (
         <html lang={params.lang}>
             <body className={inter.className}>
-                <Navigation lang={params.lang} dict={{ home: dict.home, search: dict.searchButton, register: dict.registerButton }} />
+                <Navigation lang={params.lang} dict={{ home: dict.home, search: dict.searchButton, registerConcierge: dict.registerButton }} />
                 {children}
             </body>
         </html>

@@ -23,5 +23,11 @@
     "genericError": "Une erreur s'est produite. Veuillez vérifier vos informations et réessayer.",
     "networkError": "Erreur de connexion. Veuillez vérifier votre connexion internet et réessayer.",
     "invalidEmail": "Veuillez entrer une adresse e-mail valide.",
-    "methodNotAllowed": "Le serveur ne prend pas en charge cette opération. Veuillez contacter le support."
+    "methodNotAllowed": "Le serveur ne prend pas en charge cette opération. Veuillez contacter le support.",
+    "conciergeProfileTitle": "Profil de Conciergerie",
+    "saveProfile": "Enregistrer le Profil",
+    "profile": "Profil",
+    "conciergeRegisterTitle": "S'inscrire comme Concierge",
+    "registerConcierge": "Inscrire Concierge",
+    "viewContact": "Voir Contact"
 }
