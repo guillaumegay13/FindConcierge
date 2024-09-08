@@ -11,6 +11,7 @@
   "dependencies": {
     "mongodb": "^6.8.1",
     "next": "14.2.8",
+    "next-seo": "^6.6.0",
     "react": "^18",
     "react-dom": "^18"
   },
