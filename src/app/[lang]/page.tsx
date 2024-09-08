@@ -1,8 +1,7 @@
 import Link from 'next/link';
 import { NextSeo } from 'next-seo';
 import { getDictionary } from '../dictionaries';
-
-const cities = ['paris', 'lyon', 'marseille', 'bordeaux', 'nice', 'nantes', 'strasbourg', 'montpellier'];
+import { CITIES } from '../../constants/cities';
 
 export default async function Home({ params: { lang } }: { params: { lang: string } }) {
     const dict = await getDictionary(lang);
@@ -32,7 +31,7 @@ export default async function Home({ params: { lang } }: { params: { lang: strin
                     <div className="mt-8">
                         <h2 className="text-2xl font-bold mb-4">Conciergerie dans les principales villes</h2>
                         <ul className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                            {cities.map(city => (
+                            {CITIES.map(city => (
                                 <li key={city}>
                                     <Link href={`/${lang}/ville/${city}`} className="text-blue-500 hover:underline">
                                         Conciergerie {city.charAt(0).toUpperCase() + city.slice(1)}
