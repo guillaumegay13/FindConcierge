@@ -22,6 +22,17 @@ export type Dictionary = {
     viewContact: string
     registerConciergeTitle: string
     registerConciergeDescription: string
+    registrationSuccess: string
+    registrationError: string
+    genericError: string
+    networkError: string
+    invalidEmail: string
+    methodNotAllowed: string
+    websitePlaceholder: string
+    locationPlaceholder: string
+    descriptionPlaceholder: string
+    loading: string
+    noResults: string
 }
 
 const dictionaries = {
