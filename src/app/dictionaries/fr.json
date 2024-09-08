@@ -27,7 +27,8 @@
     "conciergeProfileTitle": "Profil de Conciergerie",
     "saveProfile": "Enregistrer le Profil",
     "profile": "Profil",
-    "conciergeRegisterTitle": "S'inscrire comme Concierge",
     "registerConcierge": "Inscrire Concierge",
-    "viewContact": "Voir Contact"
+    "viewContact": "Voir Contact",
+    "registerConciergeTitle": "S'inscrire comme Concierge",
+    "registerConciergeDescription": "Remplissez le formulaire ci-dessous pour vous inscrire en tant que concierge."
 }

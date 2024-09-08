@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { getDictionary } from '../../dictionaries'
+import { Dictionary } from '../../dictionaries'
 import Link from 'next/link'
 
 interface Concierge {
@@ -12,7 +13,7 @@ interface Concierge {
 }
 
 export default function Search({ params: { lang } }: { params: { lang: string } }) {
-    const [dict, setDict] = useState<any>({})
+    const [dict, setDict] = useState<Dictionary>({} as Dictionary)
     const [searchQuery, setSearchQuery] = useState('')
     const [results, setResults] = useState<Concierge[]>([])
     const [isLoading, setIsLoading] = useState(false)

@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import { getDictionary } from '../../../dictionaries'
+import { Dictionary } from '../../../dictionaries'
 
 export default function ConciergeRegister({ params: { lang } }: { params: { lang: string } }) {
-    const [dict, setDict] = useState<any>({})
+    const [dict, setDict] = useState<Dictionary>({} as Dictionary)
     const [formData, setFormData] = useState({
         businessName: '',
         email: '',
@@ -32,7 +33,7 @@ export default function ConciergeRegister({ params: { lang } }: { params: { lang
 
     return (
         <div className="min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-            <h1 className="text-3xl font-bold mb-4">{dict.conciergeRegisterTitle}</h1>
+            <h1 className="text-3xl font-bold mb-4">{dict.conciergeProfileTitle}</h1>
             <form onSubmit={handleSubmit} className="space-y-4">
                 <input
                     type="text"

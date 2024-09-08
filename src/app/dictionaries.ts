@@ -20,6 +20,8 @@ export type Dictionary = {
     profile: string
     registerConcierge: string
     viewContact: string
+    registerConciergeTitle: string
+    registerConciergeDescription: string
 }
 
 const dictionaries = {

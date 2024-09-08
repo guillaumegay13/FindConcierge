@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import { getDictionary } from '../../dictionaries'
+import { Dictionary } from '../../dictionaries'
 
 export default function Register({ params: { lang } }: { params: { lang: string } }) {
-    const [dict, setDict] = useState<any>({})
+    const [dict, setDict] = useState<Dictionary>({} as Dictionary)
     const [formData, setFormData] = useState({
         businessName: '',
         email: '',

@@ -28,5 +28,7 @@
     "profile": "Profile",
     "conciergeRegisterTitle": "Register as a Concierge",
     "registerConcierge": "Register Concierge",
-    "viewContact": "View Contact"
+    "viewContact": "View Contact",
+    "registerConciergeTitle": "Register as a Concierge",
+    "registerConciergeDescription": "Fill in the form below to register as a concierge."
 }
