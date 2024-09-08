@@ -1,7 +1,7 @@
 import { getDictionary } from '../../../dictionaries';
 import { notFound } from 'next/navigation';
 import { CITIES, City, capitalizeCity } from '../../../../constants/cities';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 
 export async function generateStaticParams() {
     return CITIES.map(city => ({ city }));
@@ -14,6 +14,10 @@ export async function generateMetadata({ params: { lang, city } }: { params: { l
     return {
         title: `${dict.conciergerieIn} ${capitalizedCity} | ${dict.servicesForAirbnb}`,
         description: `${dict.findBestConciergeService} ${capitalizedCity} ${dict.forYourAirbnb}`,
+        openGraph: {
+            title: `${dict.conciergerieIn} ${capitalizedCity} | ${dict.servicesForAirbnb}`,
+            description: `${dict.findBestConciergeService} ${capitalizedCity} ${dict.forYourAirbnb}`,
+        },
     };
 }
 
