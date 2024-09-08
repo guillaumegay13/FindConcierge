@@ -5,8 +5,6 @@ import Navigation from '../components/Navigation'
 import { getDictionary } from '../dictionaries'
 import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from '../config'
 import { redirect } from 'next/navigation'
-import { DefaultSeo } from 'next-seo';
-import SEO from '../seo-config';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -34,14 +32,9 @@ export default async function RootLayout({
     return (
         <html lang={params.lang}>
             <body className={inter.className}>
-                <DefaultSeo {...SEO} />
                 <Navigation lang={params.lang} dict={{ home: dict.home, search: dict.searchButton, registerConcierge: dict.registerButton }} />
                 {children}
             </body>
         </html>
     )
-}
-
-export function generateStaticParams() {
-    return SUPPORTED_LANGUAGES.map(lang => ({ lang }));
 }

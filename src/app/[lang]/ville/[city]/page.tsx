@@ -14,10 +14,6 @@ export async function generateMetadata({ params: { lang, city } }: { params: { l
     return {
         title: `${dict.conciergerieIn} ${capitalizedCity} | ${dict.servicesForAirbnb}`,
         description: `${dict.findBestConciergeService} ${capitalizedCity} ${dict.forYourAirbnb}`,
-        openGraph: {
-            title: `${dict.conciergerieIn} ${capitalizedCity} | ${dict.servicesForAirbnb}`,
-            description: `${dict.findBestConciergeService} ${capitalizedCity} ${dict.forYourAirbnb}`,
-        },
     };
 }
 
