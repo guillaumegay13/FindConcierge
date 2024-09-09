@@ -1,5 +1,13 @@
 'use client'
 
+/**
+ * Concierge Register Page
+ * 
+ * This page is NOT used anymore. Instead, we used simply /register page (here is /concierge/register).
+ * 
+ * This page is kept for possible future use.
+ */
+
 import { useState, useEffect } from 'react'
 import { getDictionary } from '../../../dictionaries'
 import { Dictionary } from '../../../dictionaries'

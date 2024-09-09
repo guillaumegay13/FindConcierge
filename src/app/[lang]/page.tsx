@@ -27,18 +27,6 @@ export default async function Home({ params: { lang } }: { params: { lang: strin
                         {dict.registerButton}
                     </Link>
                 </div>
-                <div className="mt-8">
-                    <h2 className="text-2xl font-bold mb-4">Conciergerie dans les principales villes</h2>
-                    <ul className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                        {CITIES.map(city => (
-                            <li key={city}>
-                                <Link href={`/${lang}/ville/${city}`} className="text-blue-500 hover:underline">
-                                    Conciergerie {city.charAt(0).toUpperCase() + city.slice(1)}
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
             </main>
         </div>
     )
