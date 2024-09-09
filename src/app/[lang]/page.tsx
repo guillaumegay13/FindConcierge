@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { getDictionary } from '../dictionaries'
-import { CITIES } from '../../constants/cities'
 import { Metadata } from 'next'
 
 export async function generateMetadata({ params: { lang } }: { params: { lang: string } }): Promise<Metadata> {
