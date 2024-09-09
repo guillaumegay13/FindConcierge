@@ -1,14 +1,27 @@
 import { getDictionary } from '../../../dictionaries'
+import clientPromise from '../../../lib/mongodb'
+import { ObjectId } from 'mongodb'
 
-// Simuler la récupération des données du concierge
 const getConcierge = async (id: string) => {
-    // Dans une vraie application, ceci serait une requête à votre API ou base de données
-    return {
-        id,
-        name: `Concierge ${id}`,
-        location: "Paris",
-        services: ["cleaning", "key management"],
-        description: "Experienced concierge service in the heart of Paris."
+    try {
+        const client = await clientPromise
+        const db = client.db("conciergeRepository")
+        const concierge = await db.collection("concierges").findOne({ _id: new ObjectId(id) })
+
+        if (!concierge) {
+            throw new Error('Concierge not found')
+        }
+
+        return {
+            id: concierge._id.toString(),
+            name: concierge.businessName,
+            location: concierge.location,
+            services: concierge.services,
+            description: concierge.description
+        }
+    } catch (error) {
+        console.error('Error fetching concierge:', error)
+        throw error
     }
 }
 
