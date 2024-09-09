@@ -5,6 +5,7 @@ import Navigation from '../components/Navigation'
 import { getDictionary } from '../dictionaries'
 import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from '../config'
 import { redirect } from 'next/navigation'
+import { ThemeProvider } from 'next-themes'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -30,10 +31,12 @@ export default async function RootLayout({
     const dict = await getDictionary(params.lang)
 
     return (
-        <html lang={params.lang}>
-            <body className={inter.className}>
-                <Navigation lang={params.lang} dict={{ home: dict.home, search: dict.searchButton, registerConcierge: dict.registerButton }} />
-                {children}
+        <html lang={params.lang} suppressHydrationWarning>
+            <body className={`${inter.className} bg-white dark:bg-gray-900 text-black dark:text-white transition-colors duration-300`}>
+                <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+                    <Navigation lang={params.lang} dict={{ home: dict.home, search: dict.searchButton, registerConcierge: dict.registerButton }} />
+                    {children}
+                </ThemeProvider>
             </body>
         </html>
     )

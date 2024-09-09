@@ -2,38 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #000000;
-  --input-background: #ffffff;
-  --input-foreground: #000000;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --input-background: #2a2a2a;
-    --input-foreground: #ffffff;
+@layer base {
+  body {
+    @apply bg-white text-black transition-colors duration-300;
   }
-}
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-input,
-textarea,
-select {
-  background-color: var(--input-background);
-  color: var(--input-foreground);
-  border: 1px solid var(--foreground);
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .dark body {
+    @apply bg-gray-900 text-white;
   }
 }
