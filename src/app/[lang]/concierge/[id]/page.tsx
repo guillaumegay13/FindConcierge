@@ -4,9 +4,19 @@ import { useState, useEffect } from 'react'
 import { getDictionary } from '../../../dictionaries'
 import { Dictionary } from '../../../dictionaries'
 
+interface Concierge {
+    businessName: string;
+    location: string;
+    services: string;
+    description: string;
+    email: string;
+    phone: string;
+    website?: string;
+}
+
 export default function ConciergePage({ params: { lang, id } }: { params: { lang: string, id: string } }) {
     const [dict, setDict] = useState<Dictionary>({} as Dictionary)
-    const [concierge, setConcierge] = useState<any>(null)
+    const [concierge, setConcierge] = useState<Concierge | null>(null)
     const [showContact, setShowContact] = useState(false)
 
     useEffect(() => {
@@ -48,7 +58,7 @@ export default function ConciergePage({ params: { lang, id } }: { params: { lang
                     <p className="text-gray-300"><strong className="text-white">{dict.phone}:</strong> {concierge.phone}</p>
                     {concierge.website && (
                         <p className="text-gray-300">
-                            <strong className="text-white">{dict.website}:</strong>
+                            <strong className="text-white">{dict.websitePlaceholder}:</strong>
                             <a href={concierge.website} target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 ml-1">
                                 {concierge.website}
                             </a>

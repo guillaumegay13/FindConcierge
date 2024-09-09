@@ -1,15 +1,10 @@
 import '../globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import Navigation from '../components/Navigation'
 import { getDictionary } from '../dictionaries'
 import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from '../config'
 import { redirect } from 'next/navigation'
-import { ThemeProvider } from 'next-themes'
-import { SessionProvider } from 'next-auth/react'
 import ClientLayout from './ClientLayout'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export async function generateMetadata({ params: { lang } }: { params: { lang: string } }): Promise<Metadata> {
     const dict = await getDictionary(lang);
