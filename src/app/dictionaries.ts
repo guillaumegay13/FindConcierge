@@ -20,6 +20,10 @@ export type Dictionary = {
     profile: string
     registerConcierge: string
     viewContact: string
+    hideContact: string
+    contactInfo: string
+    email: string
+    phone: string
     registerConciergeTitle: string
     registerConciergeDescription: string
     registrationSuccess: string
@@ -38,6 +42,13 @@ export type Dictionary = {
     findBestConciergeService: string
     forYourAirbnb: string
     discoverBestConciergeServices: string
+    accountCreationPrompt: string
+    createAccountButton: string
+    accountCreationError: string
+    passwordPlaceholder: string
+    signIn: string
+    signInWithGoogle: string
+
 }
 
 const dictionaries = {

@@ -6,6 +6,8 @@ import { getDictionary } from '../dictionaries'
 import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from '../config'
 import { redirect } from 'next/navigation'
 import { ThemeProvider } from 'next-themes'
+import { SessionProvider } from 'next-auth/react'
+import ClientLayout from './ClientLayout'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -32,11 +34,11 @@ export default async function RootLayout({
 
     return (
         <html lang={params.lang} suppressHydrationWarning>
-            <body className={`${inter.className} bg-white dark:bg-gray-900 text-black dark:text-white transition-colors duration-300`}>
-                <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <body className="bg-white dark:bg-gray-900 text-black dark:text-white transition-colors duration-300">
+                <ClientLayout>
                     <Navigation lang={params.lang} dict={{ home: dict.home, search: dict.searchButton, registerConcierge: dict.registerButton }} />
                     {children}
-                </ThemeProvider>
+                </ClientLayout>
             </body>
         </html>
     )

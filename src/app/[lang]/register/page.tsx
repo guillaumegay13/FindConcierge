@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { getDictionary } from '../../dictionaries'
 import { Dictionary } from '../../dictionaries'
+import { useRouter } from 'next/navigation'
 
 export default function Register({ params: { lang } }: { params: { lang: string } }) {
     const [dict, setDict] = useState<Dictionary>({} as Dictionary)
@@ -17,6 +18,7 @@ export default function Register({ params: { lang } }: { params: { lang: string 
     })
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [submitMessage, setSubmitMessage] = useState('')
+    const router = useRouter()
 
     useEffect(() => {
         getDictionary(lang).then(setDict)
@@ -33,34 +35,22 @@ export default function Register({ params: { lang } }: { params: { lang: string 
         setSubmitMessage('')
 
         try {
-            console.log('Sending request to:', '/api/register');
-            const response = await fetch('/api/register', {
+            const response = await fetch('/api/register-concierge', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
             });
 
-            console.log('Response status:', response.status);
-            console.log('Response headers:', Object.fromEntries(response.headers.entries()));
-
             if (!response.ok) {
-                const errorText = await response.text();
-                console.error('Error response body:', errorText);
-                throw new Error(`HTTP error! status: ${response.status}, body: ${errorText}`);
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
 
             const data = await response.json()
-            console.log('Response data:', data);
-
-            setSubmitMessage(dict.registrationSuccess);
-            setFormData({ businessName: '', email: '', phone: '', website: '', services: '', location: '', description: '' })
+            setSubmitMessage(dict.registrationSuccess)
+            router.push(`/${lang}/concierge/${data.id}`)
         } catch (error) {
-            console.error('Detailed error:', error);
-            if (error instanceof Error) {
-                setSubmitMessage(`${dict.registrationError}: ${error.message}`);
-            } else {
-                setSubmitMessage(`${dict.registrationError}: ${dict.genericError}`);
-            }
+            console.error('Registration error:', error);
+            setSubmitMessage(`${dict.registrationError}: ${error instanceof Error ? error.message : dict.genericError}`);
         }
         setIsSubmitting(false);
     }

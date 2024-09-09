@@ -39,5 +39,11 @@
     "servicesForAirbnb": "Services for Airbnb and Short-Term Rentals",
     "findBestConciergeService": "Find the best concierge service in",
     "forYourAirbnb": "for your Airbnb or short-term rental",
-    "discoverBestConciergeServices": "Discover the best concierge services in"
+    "discoverBestConciergeServices": "Discover the best concierge services in",
+    "accountCreationPrompt": "Please create an account to view the contact information of the concierge.",
+    "createAccountButton": "Create Account",
+    "passwordPlaceholder": "Password",
+    "accountCreationError": "Account creation failed. Please try again.",
+    "signIn": "Sign In",
+    "signInWithGoogle": "Sign in with Google"
 }

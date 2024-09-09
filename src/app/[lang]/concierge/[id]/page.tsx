@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import { getDictionary } from '../../../dictionaries'
+import { Dictionary } from '../../../dictionaries'
 
 export default function ConciergePage({ params: { lang, id } }: { params: { lang: string, id: string } }) {
-    const [dict, setDict] = useState({} as any)
+    const [dict, setDict] = useState<Dictionary>({} as Dictionary)
     const [concierge, setConcierge] = useState<any>(null)
     const [showContact, setShowContact] = useState(false)
 
@@ -24,13 +25,13 @@ export default function ConciergePage({ params: { lang, id } }: { params: { lang
         fetchData()
     }, [lang, id])
 
-    if (!concierge) return <div>Loading...</div>
+    if (!concierge) return <div>{dict.loading}</div>
 
     return (
         <div className="min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-            <h1 className="text-3xl font-bold mb-4">{concierge.name}</h1>
+            <h1 className="text-3xl font-bold mb-4">{concierge.businessName}</h1>
             <p><strong>{dict.location}:</strong> {concierge.location}</p>
-            <p><strong>{dict.services}:</strong> {concierge.services.join(', ')}</p>
+            <p><strong>{dict.services}:</strong> {concierge.services}</p>
             <p className="mt-4">{concierge.description}</p>
 
             <button
@@ -45,6 +46,14 @@ export default function ConciergePage({ params: { lang, id } }: { params: { lang
                     <h2 className="text-xl font-bold mb-2 text-white">{dict.contactInfo}</h2>
                     <p className="text-gray-300"><strong className="text-white">{dict.email}:</strong> {concierge.email}</p>
                     <p className="text-gray-300"><strong className="text-white">{dict.phone}:</strong> {concierge.phone}</p>
+                    {concierge.website && (
+                        <p className="text-gray-300">
+                            <strong className="text-white">{dict.website}:</strong>
+                            <a href={concierge.website} target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 ml-1">
+                                {concierge.website}
+                            </a>
+                        </p>
+                    )}
                 </div>
             )}
         </div>

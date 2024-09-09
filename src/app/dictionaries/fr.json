@@ -39,5 +39,11 @@
     "hideContact": "Masquer Contact",
     "contactInfo": "Informations de Contact",
     "email": "Email",
-    "phone": "Téléphone"
+    "phone": "Téléphone",
+    "accountCreationPrompt": "Veuillez créer un compte pour voir les informations de contact de la concierge.",
+    "createAccountButton": "Créer un compte",
+    "passwordPlaceholder": "Mot de passe",
+    "accountCreationError": "Création de compte échouée. Veuillez réessayer.",
+    "signIn": "Se connecter",
+    "signInWithGoogle": "Se connecter avec Google"
 }
