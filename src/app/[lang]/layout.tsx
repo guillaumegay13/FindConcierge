@@ -21,9 +21,6 @@ export default async function RootLayout({
     children: React.ReactNode
     params: { lang: string }
 }) {
-    if (!SUPPORTED_LANGUAGES.includes(params.lang)) {
-        redirect(`/${DEFAULT_LANGUAGE}`);
-    }
 
     const dict = await getDictionary(params.lang)
 
