@@ -2,8 +2,6 @@ import '../globals.css'
 import type { Metadata } from 'next'
 import Navigation from '../components/Navigation'
 import { getDictionary } from '../dictionaries'
-import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from '../config'
-import { redirect } from 'next/navigation'
 import ClientLayout from './ClientLayout'
 
 export async function generateMetadata({ params: { lang } }: { params: { lang: string } }): Promise<Metadata> {
