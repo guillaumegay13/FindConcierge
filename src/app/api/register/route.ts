@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import clientPromise from '../../lib/mongodb'
+import resend from '../../lib/resend'
 
 function validateEmail(email: string) {
     const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -63,10 +64,42 @@ export async function POST(request: Request) {
         })
 
         console.log('Registration successful, inserted ID:', result.insertedId);
+
+        // Send email notification
+        await sendEmailNotification(body)
+
         return NextResponse.json({ message: 'Registration successful', id: result.insertedId }, { status: 201 })
     } catch (error) {
         console.error('Registration error:', error);
         const errorMessage = error instanceof Error ? error.message : 'Unknown error';
         return NextResponse.json({ message: 'Registration failed', error: errorMessage }, { status: 500 });
+    }
+}
+
+async function sendEmailNotification(conciergeData: {
+    businessName: string;
+    email: string;
+    location: string;
+}) {
+    try {
+        if (process.env.DEV_NOTIFICATION_EMAIL) {
+            await resend.emails.send({
+                from: 'Concierge Registration <onboarding@resend.dev>',
+                to: process.env.DEV_NOTIFICATION_EMAIL,
+                subject: 'Youhou! Une nouvelle conciergerie vient de s\'inscrire 🥳',
+                html: `
+                <ul>
+                    <li><strong>Business Name:</strong> ${conciergeData.businessName}</li>
+                    <li><strong>Email:</strong> ${conciergeData.email}</li>
+                    <li><strong>Location:</strong> ${conciergeData.location}</li>
+                </ul>
+            `,
+            });
+            console.log('Email notification sent successfully');
+        } else {
+            console.log('No DEV_NOTIFICATION_EMAIL set, email notification not sent');
+        }
+    } catch (error) {
+        console.error('Error sending email notification:', error);
     }
 }

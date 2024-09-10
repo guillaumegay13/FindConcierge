@@ -35,17 +35,19 @@ export default function Register({ params: { lang } }: { params: { lang: string 
         setSubmitMessage('')
 
         try {
-            const response = await fetch('/api/register-concierge', {
+            const response = await fetch('/api/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
             });
 
+            const data = await response.json()
+            console.log('Response:', response.status, data);
+
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                throw new Error(data.message || `HTTP error! status: ${response.status}`);
             }
 
-            const data = await response.json()
             setSubmitMessage(dict.registrationSuccess)
             router.push(`/${lang}/concierge/${data.id}`)
         } catch (error) {
