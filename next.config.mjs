@@ -5,6 +5,26 @@ const nextConfig = {
     async rewrites() {
         return [
             {
+                source: '/search',
+                destination: '/fr/search',
+                has: [
+                    {
+                        type: 'host',
+                        value: 'conciergerielocationcourte.fr',
+                    },
+                ],
+            },
+            {
+                source: '/register',
+                destination: '/fr/register',
+                has: [
+                    {
+                        type: 'host',
+                        value: 'conciergerielocationcourte.fr',
+                    },
+                ],
+            },
+            {
                 source: '/:path*',
                 has: [
                     {
