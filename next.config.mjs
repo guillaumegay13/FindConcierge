@@ -12,7 +12,7 @@ const nextConfig = {
                         value: 'conciergerielocationcourte.fr',
                     },
                 ],
-                destination: '/fr/:path*',
+                destination: '/:path*',
             },
             {
                 source: '/fr/:path*',
@@ -22,7 +22,7 @@ const nextConfig = {
                         value: 'conciergerielocationcourte.fr',
                     },
                 ],
-                destination: '/fr/:path*',
+                destination: '/:path*',
             },
             {
                 source: '/:path*',
