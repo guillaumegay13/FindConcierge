@@ -1,11 +1,8 @@
 import { NextResponse } from 'next/server';
 
 async function fetchVercelAnalytics(metric: string, interval: string) {
-    console.log('Project ID:', process.env.VERCEL_PROJECT_ID);
-    console.log('Token:', process.env.VERCEL_TOKEN ? 'Set' : 'Not set');
 
     const url = `https://api.vercel.com/v9/projects/${process.env.VERCEL_PROJECT_ID}/stats/${metric}?interval=${interval}`;
-    console.log('Fetching URL:', url);
 
     const response = await fetch(url, {
         headers: {
@@ -14,8 +11,6 @@ async function fetchVercelAnalytics(metric: string, interval: string) {
     });
 
     if (!response.ok) {
-        console.log('Response status:', response.status);
-        console.log('Response text:', await response.text());
         throw new Error(`HTTP error! status: ${response.status}`);
     }
 
