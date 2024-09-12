@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import Navigation from '../components/Navigation'
 import { getDictionary } from '../dictionaries'
 import ClientLayout from './ClientLayout'
+import { Analytics } from '@vercel/analytics/react';
 
 export async function generateMetadata({ params: { lang } }: { params: { lang: string } }): Promise<Metadata> {
     const dict = await getDictionary(lang);
@@ -29,6 +30,7 @@ export default async function RootLayout({
                     <Navigation lang={params.lang} dict={{ home: dict.home, search: dict.searchButton, registerConcierge: dict.registerButton }} />
                     {children}
                 </ClientLayout>
+                <Analytics />
             </body>
         </html>
     )

@@ -54,5 +54,8 @@
     "redirectingHome": "Redirecting to home...",
     "paymentTitle": "Payment",
     "paymentDescription": "Please enter your payment information to complete the registration process.",
-    "price": "Price"
+    "price": "Price",
+    "visitorsToday": "Visitors today",
+    "visitorsPastWeek": "Visitors in the past 7 days",
+    "liveVisitors": "Live visitors"
 }

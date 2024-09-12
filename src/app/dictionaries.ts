@@ -57,6 +57,9 @@ export type Dictionary = {
     paymentTitle: string
     paymentDescription: string
     price: string
+    visitorsToday: string
+    visitorsPastWeek: string
+    liveVisitors: string
 }
 
 const dictionaries = {

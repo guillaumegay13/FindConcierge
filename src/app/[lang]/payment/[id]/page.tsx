@@ -18,7 +18,8 @@ function PaymentForm({ onSuccess, onError, lang, dict }: { onSuccess: () => void
     useEffect(() => {
         if (!stripe) {
             console.error('Stripe.js has not loaded yet.');
-            setErrorMessage('There was a problem loading the payment system.');
+        } else {
+            console.log('Stripe is available in PaymentForm');
         }
     }, [stripe]);
 
@@ -33,19 +34,37 @@ function PaymentForm({ onSuccess, onError, lang, dict }: { onSuccess: () => void
         setIsProcessing(true);
         setErrorMessage('');
 
-        const { error } = await stripe.confirmPayment({
+        const { error, paymentIntent } = await stripe.confirmPayment({
             elements,
             confirmParams: {
                 return_url: `${window.location.origin}/${lang}/register/success`,
             },
+            redirect: 'if_required',
         });
 
         if (error) {
             console.error('Payment error:', error);
             setErrorMessage(error.message || dict.genericError);
             onError(error.message || dict.genericError);
+        } else if (paymentIntent) {
+            console.log('Payment intent status:', paymentIntent.status);
+            switch (paymentIntent.status) {
+                case 'succeeded':
+                    onSuccess();
+                    break;
+                case 'requires_payment_method':
+                    setErrorMessage('Your payment was not successful, please try again.');
+                    break;
+                case 'requires_confirmation':
+                    // You might want to confirm the payment on the server here
+                    break;
+                default:
+                    setErrorMessage(`Unexpected payment status: ${paymentIntent.status}. Please contact support.`);
+                    onError(`Unexpected payment status: ${paymentIntent.status}`);
+            }
         } else {
-            onSuccess();
+            setErrorMessage('An unexpected error occurred. Please try again.');
+            onError('Unexpected error');
         }
 
         setIsProcessing(false);
@@ -78,17 +97,21 @@ export default function Payment({ params: { lang, id } }: { params: { lang: stri
     const router = useRouter()
 
     useEffect(() => {
-        console.log('Stripe Publishable Key:', process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
-        stripePromise.then(
-            (stripe) => {
-                console.log('Stripe loaded successfully');
-                setStripeLoaded(stripe);
-            },
-            (error) => {
-                console.error('Failed to load Stripe:', error);
-                setError('Failed to load the payment system. Please try again later.');
+
+        const loadStripeAndInitialize = async () => {
+            try {
+                const stripe = await stripePromise;
+                if (stripe) {
+                    setStripeLoaded(stripe);
+                } else {
+                    throw new Error('Stripe failed to initialize');
+                }
+            } catch (error) {
+                setError(`Failed to load the payment system. Please try refreshing the page.`);
             }
-        );
+        };
+
+        loadStripeAndInitialize();
 
         getDictionary(lang).then(setDict)
 
@@ -134,14 +157,19 @@ export default function Payment({ params: { lang, id } }: { params: { lang: stri
                 method: 'POST',
             });
 
+            const result = await response.json();
+
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                throw new Error(`HTTP error! status: ${response.status}, message: ${result.error || 'Unknown error'}`);
             }
 
-            router.push(`/${lang}/concierge/${id}`)
+            if (result.success) {
+                router.push(`/${lang}/register/success`);
+            } else {
+                throw new Error(result.error || 'Payment confirmation failed without specific error');
+            }
         } catch (error) {
-            console.error('Payment confirmation error:', error);
-            setError('Failed to confirm payment. Please contact support.');
+            setError(`Failed to confirm payment: ${error instanceof Error ? error.message : 'Unknown error'}. Please contact support.`);
         }
     }
 
@@ -172,7 +200,13 @@ export default function Payment({ params: { lang, id } }: { params: { lang: stri
                     <PaymentForm onSuccess={handlePaymentSuccess} onError={handlePaymentError} lang={lang} dict={dict} />
                 </Elements>
             ) : (
-                <div>Loading payment form...</div>
+                <div>
+                    {error ? (
+                        <div className="text-red-500">{error}</div>
+                    ) : (
+                        <div>Loading payment form...</div>
+                    )}
+                </div>
             )}
         </div>
     )
