@@ -67,7 +67,7 @@ export default function Search({ params: { lang } }: { params: { lang: string } 
                             </Link>
                         </h2>
                         <p>{dict.location}: {concierge.location}</p>
-                        <p>{dict.services}: {concierge.services.join(', ')}</p>
+                        <p>{dict.services}: {concierge.services}</p>
                     </div>
                 ))}
             </div>
