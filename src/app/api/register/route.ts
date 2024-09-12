@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server'
 import clientPromise from '../../lib/mongodb'
 import resend from '../../lib/resend'
-import stripe from '../../lib/stripe'
 
 function validateEmail(email: string) {
     const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
