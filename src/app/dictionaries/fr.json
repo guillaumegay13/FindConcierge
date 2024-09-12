@@ -45,5 +45,14 @@
     "passwordPlaceholder": "Mot de passe",
     "accountCreationError": "Création de compte échouée. Veuillez réessayer.",
     "signIn": "Se connecter",
-    "signInWithGoogle": "Se connecter avec Google"
+    "signInWithGoogle": "Se connecter avec Google",
+    "proceedToPayment": "Procéder au paiement",
+    "processing": "Traitement en cours...",
+    "pay": "Payer",
+    "paymentError": "Erreur de paiement",
+    "paymentSuccessful": "Paiement réussi !",
+    "redirectingHome": "Redirection vers l'accueil...",
+    "paymentTitle": "Paiement",
+    "paymentDescription": "Veuillez entrer vos informations de paiement pour compléter le processus d'inscription.",
+    "price": "Prix"
 }

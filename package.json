@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^3.4.2",
+    "@stripe/react-stripe-js": "^2.8.0",
+    "@stripe/stripe-js": "^4.4.0",
     "bcrypt": "^5.1.1",
     "mongodb": "^6.8.1",
     "next": "14.2.8",

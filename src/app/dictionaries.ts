@@ -48,7 +48,15 @@ export type Dictionary = {
     passwordPlaceholder: string
     signIn: string
     signInWithGoogle: string
-
+    proceedToPayment: string
+    processing: string
+    pay: string
+    paymentError: string
+    paymentSuccessful: string
+    redirectingHome: string
+    paymentTitle: string
+    paymentDescription: string
+    price: string
 }
 
 const dictionaries = {

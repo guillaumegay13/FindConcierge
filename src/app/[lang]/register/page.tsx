@@ -4,6 +4,50 @@ import { useState, useEffect } from 'react'
 import { getDictionary } from '../../dictionaries'
 import { Dictionary } from '../../dictionaries'
 import { useRouter } from 'next/navigation'
+import { loadStripe } from '@stripe/stripe-js'
+import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js'
+
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+
+function PaymentForm({ onSuccess, onError, lang, dict }: { onSuccess: () => void, onError: (error: string) => void, lang: string, dict: Dictionary }) {
+    const stripe = useStripe();
+    const elements = useElements();
+    const [isProcessing, setIsProcessing] = useState(false);
+
+    const handleSubmit = async (event: React.FormEvent) => {
+        event.preventDefault();
+
+        if (!stripe || !elements) {
+            return;
+        }
+
+        setIsProcessing(true);
+
+        const { error } = await stripe.confirmPayment({
+            elements,
+            confirmParams: {
+                return_url: `${window.location.origin}/${lang}/register/success`,
+            },
+        });
+
+        if (error) {
+            onError(error.message || dict.genericError);
+        } else {
+            onSuccess();
+        }
+
+        setIsProcessing(false);
+    };
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <PaymentElement />
+            <button disabled={isProcessing || !stripe || !elements} className="mt-4 bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 disabled:bg-blue-300">
+                {isProcessing ? dict.processing : dict.pay}
+            </button>
+        </form>
+    );
+}
 
 export default function Register({ params: { lang } }: { params: { lang: string } }) {
     const [dict, setDict] = useState<Dictionary>({} as Dictionary)
@@ -49,7 +93,7 @@ export default function Register({ params: { lang } }: { params: { lang: string 
             }
 
             setSubmitMessage(dict.registrationSuccess)
-            router.push(`/${lang}/concierge/${data.id}`)
+            router.push(`/${lang}/payment/${data.id}`)
         } catch (error) {
             console.error('Registration error:', error);
             setSubmitMessage(`${dict.registrationError}: ${error instanceof Error ? error.message : dict.genericError}`);

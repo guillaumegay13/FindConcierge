@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import clientPromise from '../../lib/mongodb'
 import resend from '../../lib/resend'
+import stripe from '../../lib/stripe'
 
 function validateEmail(email: string) {
     const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -60,7 +61,8 @@ export async function POST(request: Request) {
             services: services.split(',').map((s: string) => s.trim()),
             location,
             description,
-            createdAt: new Date()
+            createdAt: new Date(),
+            paymentStatus: 'pending'
         })
 
         console.log('Registration successful, inserted ID:', result.insertedId);
