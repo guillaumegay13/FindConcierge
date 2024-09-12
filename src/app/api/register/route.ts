@@ -57,7 +57,7 @@ export async function POST(request: Request) {
             email,
             phone,
             website,
-            services: services.split(',').map((s: string) => s.trim()),
+            services,
             location,
             description,
             createdAt: new Date(),
