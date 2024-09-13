@@ -55,7 +55,6 @@
     "paymentTitle": "Payment",
     "paymentDescription": "Please enter your payment information to complete the registration process.",
     "price": "Price",
-    "visitorsToday": "Visitors today",
-    "visitorsPastWeek": "Visitors in the past 7 days",
-    "liveVisitors": "Live visitors"
+    "leftAtCurrentPrice": "left at current price",
+    "nextPrice": "Next price"
 }

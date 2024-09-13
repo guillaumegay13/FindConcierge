@@ -55,7 +55,6 @@
     "paymentTitle": "Paiement",
     "paymentDescription": "Veuillez entrer vos informations de paiement pour compléter le processus d'inscription.",
     "price": "Prix",
-    "visitorsToday": "Visiteurs aujourd'hui",
-    "visitorsPastWeek": "Visiteurs dans la semaine dernière",
-    "liveVisitors": "Visiteurs en direct"
+    "leftAtCurrentPrice": "restant au prix actuel",
+    "nextPrice": "Prix suivant"
 }

@@ -92,12 +92,12 @@ export default function Payment({ params: { lang, id } }: { params: { lang: stri
     const [dict, setDict] = useState<Dictionary>({} as Dictionary)
     const [clientSecret, setClientSecret] = useState('')
     const [productInfo, setProductInfo] = useState<{ name: string, description: string, price: number, currency: string } | null>(null)
+    const [priceInfo, setPriceInfo] = useState<{ currentPrice: { amount: number, remaining: number }, nextPrice: { amount: number } | null } | null>(null)
     const [error, setError] = useState('')
     const [stripeLoaded, setStripeLoaded] = useState<Stripe | null>(null)
     const router = useRouter()
 
     useEffect(() => {
-
         const loadStripeAndInitialize = async () => {
             try {
                 const stripe = await stripePromise;
@@ -131,6 +131,25 @@ export default function Payment({ params: { lang, id } }: { params: { lang: stri
             .catch(error => {
                 console.error('Error fetching product info:', error);
                 setError('Failed to load product information. Please try again.');
+            });
+
+        fetch('/api/get-current-price')
+            .then(res => res.json())
+            .then(data => {
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+                setPriceInfo({
+                    currentPrice: {
+                        amount: data.currentPrice.amount / 100,
+                        remaining: data.currentPrice.remaining
+                    },
+                    nextPrice: data.nextPrice ? { amount: data.nextPrice.amount / 100 } : null
+                })
+            })
+            .catch(error => {
+                console.error('Error fetching price info:', error);
+                setError('Failed to load pricing information. Please try again.');
             });
 
         fetch('/api/create-payment-intent', {
@@ -185,13 +204,21 @@ export default function Payment({ params: { lang, id } }: { params: { lang: stri
     return (
         <div className="min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
             <h1 className="text-3xl font-bold mb-4">{dict.paymentTitle}</h1>
-            {productInfo && (
+            {productInfo && priceInfo && (
                 <>
                     <h2 className="text-2xl font-semibold mb-2">{productInfo.name}</h2>
                     <p className="mb-4">{productInfo.description}</p>
-                    <p className="text-xl font-bold mb-8">
-                        {dict.price}: {productInfo.price} {productInfo.currency}
+                    <p className="text-xl font-bold mb-2">
+                        {dict.price}: {priceInfo.currentPrice.amount} {productInfo.currency}
                     </p>
+                    <p className="mb-2">
+                        {priceInfo.currentPrice.remaining} {dict.leftAtCurrentPrice}
+                    </p>
+                    {priceInfo.nextPrice && (
+                        <p className="mb-4">
+                            {dict.nextPrice}: {priceInfo.nextPrice.amount} {productInfo.currency}
+                        </p>
+                    )}
                 </>
             )}
             <p className="mb-4">{dict.paymentDescription}</p>
