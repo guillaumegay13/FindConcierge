@@ -10,12 +10,18 @@ export async function GET(request: Request) {
         const db = client.db("conciergeRepository")
         const concierges = db.collection("concierges")
 
-        const filter: { paymentStatus: string; $or?: Array<{ [key: string]: { $regex: string; $options: string } }> } = { paymentStatus: 'active' } // Only include active records
+        const filter: { paymentStatus: string; $or?: Array<{ [key: string]: any }> } = {
+            paymentStatus: 'active'
+        }
+
         if (query) {
+            const regexQuery = new RegExp(query, 'i')
             filter.$or = [
-                { businessName: { $regex: query, $options: 'i' } },
-                { location: { $regex: query, $options: 'i' } },
-                { services: { $regex: query, $options: 'i' } }
+                { businessName: regexQuery },
+                { 'location.en': regexQuery },
+                { 'location.fr': regexQuery },
+                { 'services.en': regexQuery },
+                { 'services.fr': regexQuery }
             ]
         }
 

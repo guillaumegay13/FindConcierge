@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import clientPromise from '../../lib/mongodb'
 import resend from '../../lib/resend'
+import { SERVICES, Service } from '../../../constants/services'
+import frDictionary from '../../dictionaries/fr.json';
 
 function validateEmail(email: string) {
     const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -14,16 +16,25 @@ function validatePhone(phone: string) {
 
 function validateUrl(url: string) {
     if (!url) return true; // Allow empty URL
-    const re = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+    const re = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,})([\/\w \.-]*)*\/?$/i;
     return re.test(url);
+}
+
+function normalizeUrl(url: string): string {
+    if (!url) return '';
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+        return `https://${url}`;
+    }
+    return url;
+}
+
+function validateServices(services: Service[]) {
+    return services.every(service => SERVICES.includes(service));
 }
 
 export async function POST(request: Request) {
     try {
-        console.log('Received registration request');
         const body = await request.json()
-        console.log('Request body:', body);
-
         const { businessName, email, phone, website, services, location, description } = body
 
         // Validate inputs
@@ -39,15 +50,7 @@ export async function POST(request: Request) {
         if (!validateUrl(website)) {
             return NextResponse.json({ message: 'Invalid website URL' }, { status: 400 })
         }
-        if (!location || location.length < 2) {
-            return NextResponse.json({ message: 'Invalid location' }, { status: 400 })
-        }
-        if (!services || services.length < 2) {
-            return NextResponse.json({ message: 'Invalid services' }, { status: 400 })
-        }
-        if (!description || description.length < 10) {
-            return NextResponse.json({ message: 'Description is too short' }, { status: 400 })
-        }
+        const normalizedWebsite = normalizeUrl(website);
 
         const client = await clientPromise
         const db = client.db("conciergeRepository")
@@ -56,9 +59,15 @@ export async function POST(request: Request) {
             businessName,
             email,
             phone,
-            website,
-            services,
-            location,
+            website: normalizedWebsite,
+            services: services.map((service: Service) => ({
+                en: service,
+                fr: frDictionary[service as keyof typeof frDictionary] || service
+            })),
+            location: location.map((loc: string) => ({
+                en: loc,
+                fr: (frDictionary as Record<string, string>)[loc] || loc
+            })),
             description,
             createdAt: new Date(),
             paymentStatus: 'pending'
@@ -81,6 +90,7 @@ async function sendEmailNotification(conciergeData: {
     businessName: string;
     email: string;
     location: string;
+    services: Service[];
 }) {
     try {
         if (process.env.DEV_NOTIFICATION_EMAIL) {
@@ -93,6 +103,7 @@ async function sendEmailNotification(conciergeData: {
                     <li><strong>Business Name:</strong> ${conciergeData.businessName}</li>
                     <li><strong>Email:</strong> ${conciergeData.email}</li>
                     <li><strong>Location:</strong> ${conciergeData.location}</li>
+                    <li><strong>Services:</strong> ${conciergeData.services.join(', ')}</li>
                 </ul>
             `,
             });

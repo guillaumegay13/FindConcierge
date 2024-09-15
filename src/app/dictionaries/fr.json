@@ -56,5 +56,21 @@
     "paymentDescription": "Veuillez entrer vos informations de paiement pour compléter le processus d'inscription.",
     "price": "Prix",
     "leftAtCurrentPrice": "restant au prix actuel",
-    "nextPrice": "Prix suivant"
+    "nextPrice": "Prix suivant",
+    "online_listing_creation": "Création des annonces en ligne",
+    "professional_photography": "Photographie professionnelle du logement",
+    "price_optimization": "Optimisation des tarifs de location",
+    "calendar_management": "Gestion du calendrier",
+    "guest_tracking": "Suivi des voyageurs",
+    "linen_supply": "Fourniture et entretien du linge de maison",
+    "professional_cleaning": "Ménage professionnel",
+    "maintenance_service": "Service de maintenance",
+    "check_in_out": "Check-in / Check-Out",
+    "welcome_gifts": "Cadeaux de bienvenue",
+    "assistance_24_7": "Service d'assistance 24/7",
+    "review_monitoring": "Suivi des évaluations",
+    "property_insurance": "Assurance du logement",
+    "consumables_tracking": "Suivi des consommables",
+    "noLocationSelected": "Veuillez sélectionner au moins une localisation",
+    "notAvailable": "Non disponible"
 }

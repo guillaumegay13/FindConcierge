@@ -59,6 +59,22 @@ export type Dictionary = {
     price: string
     leftAtCurrentPrice: string
     nextPrice: string
+    online_listing_creation: string
+    professional_photography: string
+    price_optimization: string
+    calendar_management: string
+    guest_tracking: string
+    linen_supply: string
+    professional_cleaning: string
+    maintenance_service: string
+    check_in_out: string
+    welcome_gifts: string
+    assistance_24_7: string
+    review_monitoring: string
+    property_insurance: string
+    consumables_tracking: string
+    noLocationSelected: string
+    notAvailable: string
 }
 
 const dictionaries = {

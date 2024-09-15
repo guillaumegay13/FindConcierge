@@ -4,15 +4,16 @@ import { useState, useEffect } from 'react'
 import { getDictionary } from '../../dictionaries'
 import { Dictionary } from '../../dictionaries'
 import Link from 'next/link'
+import { SERVICES } from '../../../constants/services'
 
 interface Concierge {
     _id: string;
     businessName: string;
-    location: string;
-    services: string[];
+    location: { en: string; fr: string }[];
+    services: { en: string; fr: string }[];
 }
 
-export default function Search({ params: { lang } }: { params: { lang: string } }) {
+export default function Search({ params: { lang } }: { params: { lang: 'en' | 'fr' } }) {
     const [dict, setDict] = useState<Dictionary>({} as Dictionary)
     const [searchQuery, setSearchQuery] = useState('')
     const [results, setResults] = useState<Concierge[]>([])
@@ -66,8 +67,8 @@ export default function Search({ params: { lang } }: { params: { lang: string } 
                                 {concierge.businessName}
                             </Link>
                         </h2>
-                        <p>{dict.location}: {concierge.location}</p>
-                        <p>{dict.services}: {concierge.services}</p>
+                        <p>{dict.location}: {concierge.location?.map(loc => loc[lang as 'en' | 'fr'])?.join(', ') || dict.notAvailable}</p>
+                        <p>{dict.services}: {concierge.services?.map(service => dict[service.en as keyof Dictionary] || service.en)?.join(', ') || dict.notAvailable}</p>
                     </div>
                 ))}
             </div>
