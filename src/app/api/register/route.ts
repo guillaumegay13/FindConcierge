@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import clientPromise from '../../lib/mongodb'
 import resend from '../../lib/resend'
-import { SERVICES, Service } from '../../../constants/services'
+import { Service } from '../../../constants/services'
 import frDictionary from '../../dictionaries/fr.json';
 
 function validateEmail(email: string) {
@@ -26,10 +26,6 @@ function normalizeUrl(url: string): string {
         return `https://${url}`;
     }
     return url;
-}
-
-function validateServices(services: Service[]) {
-    return services.every(service => SERVICES.includes(service));
 }
 
 export async function POST(request: Request) {

@@ -1,6 +1,14 @@
 import { NextResponse } from 'next/server'
 import clientPromise from '../../lib/mongodb'
 
+type FilterCondition = {
+    businessName?: RegExp;
+    'location.en'?: RegExp;
+    'location.fr'?: RegExp;
+    'services.en'?: RegExp;
+    'services.fr'?: RegExp;
+};
+
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url)
     const query = searchParams.get('q')
@@ -10,7 +18,7 @@ export async function GET(request: Request) {
         const db = client.db("conciergeRepository")
         const concierges = db.collection("concierges")
 
-        const filter: { paymentStatus: string; $or?: Array<{ [key: string]: any }> } = {
+        const filter: { paymentStatus: string; $or?: FilterCondition[] } = {
             paymentStatus: 'active'
         }
 

@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 import { getDictionary } from '../../dictionaries'
 import { Dictionary } from '../../dictionaries'
 import Link from 'next/link'
-import { SERVICES } from '../../../constants/services'
 
 interface Concierge {
     _id: string;
