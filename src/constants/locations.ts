@@ -31,7 +31,10 @@ export const LOCATIONS = [
 
     // Specific terms
     'cote-dazur', 'french-riviera', 'provence', 'languedoc', 'cote-basque', 'cote-atlantique',
-    'alpes-francaises', 'pyrenees', 'loire-valley', 'dordogne', 'luberon', 'camargue'
+    'alpes-francaises', 'pyrenees', 'loire-valley', 'dordogne', 'luberon', 'camargue',
+
+    // Custom
+    'lons-le-saunier'
 ] as const;
 
 export type Location = typeof LOCATIONS[number];

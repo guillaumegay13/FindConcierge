@@ -72,5 +72,17 @@
     "property_insurance": "Property Insurance",
     "consumables_tracking": "Consumables Tracking",
     "noLocationSelected": "Please select at least one location",
-    "notAvailable": "Not available"
+    "notAvailable": "Not available",
+    "about": "About",
+    "aboutDescription": "About Conciergerie Location Courte",
+    "aboutContent1": "Conciergerie Location Courte is a specialized platform connecting short-term rental property owners with professional concierge services.",
+    "aboutContent2": "We curate a network of experienced concierges who offer tailored solutions to elevate guest experiences and streamline property management for hosts.",
+    "aboutContent3": "Whether you're a city apartment owner or a vacation villa, our platform connects you to the best concierge services in your area. We commit to optimizing your rental while freeing you from daily management stress.",
+    "aboutContent4": "With FindConcierge, enjoy total peace of mind and quality service for your short-term rental.",
+    "forConcierges": "For Concierges",
+    "conciergeContent1": "Are you a concierge service looking for new clients? Conciergerie Location Courte is the perfect platform to expand your business.",
+    "conciergeContent2": "By registering on our directory, you gain increased visibility among short-term rental property owners seeking professional services like yours.",
+    "conciergeContent3": "Join our network of trusted concierges and expand your clientele today.",
+    "contactUs": "Contact Us",
+    "contactDescription": "For any questions or to contact us, please use the email address below."
 }

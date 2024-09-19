@@ -75,6 +75,18 @@ export type Dictionary = {
     consumables_tracking: string
     noLocationSelected: string
     notAvailable: string
+    about: string
+    aboutDescription: string
+    aboutContent1: string
+    aboutContent2: string
+    aboutContent3: string
+    aboutContent4: string
+    forConcierges: string
+    conciergeContent1: string
+    conciergeContent2: string
+    conciergeContent3: string
+    contactUs: string
+    contactDescription: string
 }
 
 const dictionaries = {

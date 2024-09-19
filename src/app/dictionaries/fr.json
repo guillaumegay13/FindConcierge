@@ -72,5 +72,17 @@
     "property_insurance": "Assurance du logement",
     "consumables_tracking": "Suivi des consommables",
     "noLocationSelected": "Veuillez sélectionner au moins une localisation",
-    "notAvailable": "Non disponible"
+    "notAvailable": "Non disponible",
+    "about": "À propos",
+    "aboutDescription": "À propos de Conciergerie Location Courte",
+    "aboutContent1": "Conciergerie Location Courte est un annuaire de services de conciergerie dédiés aux locations courte durée. Notre plateforme met en relation les propriétaires de logements avec des services de conciergerie professionnels dans de nombreuses localisations.",
+    "aboutContent2": "Notre mission est de simplifier la gestion des locations courte durée tout en maximisant leur potentiel. Nous élaborons un réseau étendu de concierges expérimentés et fiables, proposant des solutions sur mesure pour chaque propriété.",
+    "aboutContent3": "Que vous possédiez un appartement en ville, une villa de vacances ou tout autre type de bien, notre plateforme vous connecte aux meilleurs services de conciergerie adaptés à vos besoins spécifiques. Nous couvrons un large éventail de localisations pour vous offrir un choix optimal.",
+    "aboutContent4": "Avec Conciergerie Location Courte, bénéficiez d'un accès facile à des services de qualité, d'une gestion optimisée de votre bien, et d'une tranquillité d'esprit totale pour votre location courte durée, où que vous soyez.",
+    "forConcierges": "Pour les Conciergeries",
+    "conciergeContent1": "Êtes-vous un service de conciergerie à la recherche de nouveaux clients ? Conciergerie Location Courte est la plateforme idéale pour développer votre activité.",
+    "conciergeContent2": "En vous inscrivant sur notre annuaire, vous bénéficiez d'une visibilité accrue auprès de propriétaires de locations courte durée à la recherche de services professionnels comme les vôtres.",
+    "conciergeContent3": "Rejoignez notre réseau de conciergeries de confiance et élargissez votre clientèle dès aujourd'hui.",
+    "contactUs": "Contactez-nous",
+    "contactDescription": "Pour toute question ou pour nous contacter, veuillez utiliser l'adresse e-mail ci-dessous."
 }

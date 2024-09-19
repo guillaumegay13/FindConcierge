@@ -9,6 +9,7 @@ type NavigationProps = {
         home: string
         search: string
         registerConcierge: string
+        about: string
     }
 }
 
@@ -19,6 +20,7 @@ export default function Navigation({ lang, dict }: NavigationProps) {
                 <li><Link href={`/${lang}`}>{dict.home}</Link></li>
                 <li><Link href={`/${lang}/search`}>{dict.search}</Link></li>
                 <li><Link href={`/${lang}/register`}>{dict.registerConcierge}</Link></li>
+                <li><Link href={`/${lang}/about`}>{dict.about}</Link></li>
             </ul>
             <ThemeToggle />
         </nav>
