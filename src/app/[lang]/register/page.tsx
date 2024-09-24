@@ -95,81 +95,127 @@ export default function Register({ params: { lang } }: { params: { lang: string 
     }
 
     return (
-        <div className="min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-            <h1 className="text-3xl font-bold mb-4">{dict.registerTitle}</h1>
-            <form onSubmit={handleSubmit} className="space-y-4">
-                <input type="text" name="businessName" value={formData.businessName} onChange={handleChange} placeholder={dict.businessNamePlaceholder} className="w-full p-2 border rounded" required />
-                <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder={dict.emailPlaceholder} className="w-full p-2 border rounded" required />
-                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder={dict.phonePlaceholder} className="w-full p-2 border rounded" required />
-                <input type="url" name="website" value={formData.website} onChange={handleChange} placeholder={dict.websitePlaceholder} className="w-full p-2 border rounded" />
-
-                {/* Services field */}
-                <div>
-                    <p className="mb-2">{dict.servicesPlaceholder}</p>
-                    <div className="flex flex-wrap gap-2">
-                        {SERVICES.map(service => (
-                            <button
-                                key={service}
-                                type="button"
-                                onClick={() => handleServiceToggle(service)}
-                                className={`px-3 py-1 rounded ${formData.services.includes(service)
-                                    ? 'bg-blue-500 text-white'
-                                    : 'bg-gray-200 text-gray-800'
-                                    }`}
-                            >
-                                {dict[service as keyof Dictionary]}
-                            </button>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Locations field */}
-                <div>
+        <div className="min-h-screen bg-white pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mx-auto">
+                <h1 className="text-5xl font-extrabold text-gray-900 mb-4 leading-tight">{dict.registerTitle}</h1>
+                <div className="w-20 h-1 bg-black mb-8"></div>
+                <form onSubmit={handleSubmit} className="space-y-6">
                     <input
                         type="text"
-                        value={locationSearch}
-                        onChange={(e) => setLocationSearch(e.target.value)}
-                        placeholder={dict.locationPlaceholder}
-                        className="w-full p-2 border rounded mb-2"
+                        name="businessName"
+                        value={formData.businessName}
+                        onChange={handleChange}
+                        placeholder={dict.businessNamePlaceholder}
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
+                        required
                     />
-                    {locationSearch && (
-                        <ul className="border rounded mt-1 max-h-40 overflow-y-auto">
-                            {LOCATIONS
-                                .filter(location =>
-                                    MULTILINGUAL_LOCATIONS[location][lang].toLowerCase().includes(locationSearch.toLowerCase())
-                                )
-                                .map(location => (
-                                    <li
-                                        key={location}
-                                        onClick={() => handleLocationSelect(location)}
-                                        className="p-2 hover:bg-gray-100 cursor-pointer"
-                                    >
-                                        {MULTILINGUAL_LOCATIONS[location][lang]}
-                                    </li>
-                                ))}
-                        </ul>
-                    )}
-                    <div className="flex flex-wrap gap-2 mt-2">
-                        {formData.location.map(location => (
-                            <span key={location} className="bg-blue-100 text-blue-800 px-2 py-1 rounded flex items-center">
-                                {MULTILINGUAL_LOCATIONS[location][lang]}
-                                <button
-                                    onClick={() => handleLocationRemove(location)}
-                                    className="ml-2 text-blue-800 hover:text-blue-600"
-                                >
-                                    &times;
-                                </button>
-                            </span>
-                        ))}
-                    </div>
-                </div>
+                    <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder={dict.emailPlaceholder}
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
+                        required
+                    />
+                    <input
+                        type="tel"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        placeholder={dict.phonePlaceholder}
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
+                        required
+                    />
+                    <input
+                        type="url"
+                        name="website"
+                        value={formData.website}
+                        onChange={handleChange}
+                        placeholder={dict.websitePlaceholder}
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
+                    />
 
-                <textarea name="description" value={formData.description} onChange={handleChange} placeholder={dict.descriptionPlaceholder} className="w-full p-2 border rounded" rows={4} required></textarea>
-                <button type="submit" disabled={isSubmitting} className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 disabled:bg-blue-300">
-                    {isSubmitting ? dict.loading : dict.registerButton}
-                </button>
-            </form>
-            {submitMessage && <p className="mt-4">{submitMessage}</p>}
+                    <div>
+                        <p className="mb-2 font-medium text-gray-700">{dict.servicesPlaceholder}</p>
+                        <div className="flex flex-wrap gap-2">
+                            {SERVICES.map(service => (
+                                <button
+                                    key={service}
+                                    type="button"
+                                    onClick={() => handleServiceToggle(service)}
+                                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${formData.services.includes(service)
+                                        ? 'bg-black text-white'
+                                        : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
+                                        }`}
+                                >
+                                    {dict[service as keyof Dictionary]}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div>
+                        <p className="mb-2 font-medium text-gray-700">{dict.locationPlaceholder}</p>
+                        <input
+                            type="text"
+                            value={locationSearch}
+                            onChange={(e) => setLocationSearch(e.target.value)}
+                            placeholder={dict.locationPlaceholder}
+                            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent mb-2"
+                        />
+                        {locationSearch && (
+                            <ul className="border rounded-lg mt-1 max-h-40 overflow-y-auto">
+                                {LOCATIONS
+                                    .filter(location =>
+                                        MULTILINGUAL_LOCATIONS[location][lang].toLowerCase().includes(locationSearch.toLowerCase())
+                                    )
+                                    .map(location => (
+                                        <li
+                                            key={location}
+                                            onClick={() => handleLocationSelect(location)}
+                                            className="p-2 hover:bg-gray-100 cursor-pointer"
+                                        >
+                                            {MULTILINGUAL_LOCATIONS[location][lang]}
+                                        </li>
+                                    ))}
+                            </ul>
+                        )}
+                        <div className="flex flex-wrap gap-2 mt-2">
+                            {formData.location.map(location => (
+                                <span key={location} className="bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm font-medium flex items-center">
+                                    {MULTILINGUAL_LOCATIONS[location][lang]}
+                                    <button
+                                        onClick={() => handleLocationRemove(location)}
+                                        className="ml-2 text-gray-600 hover:text-gray-800"
+                                    >
+                                        &times;
+                                    </button>
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+
+                    <textarea
+                        name="description"
+                        value={formData.description}
+                        onChange={handleChange}
+                        placeholder={dict.descriptionPlaceholder}
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
+                        rows={4}
+                        required
+                    ></textarea>
+
+                    <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition duration-200 disabled:bg-gray-400"
+                    >
+                        {isSubmitting ? dict.loading : dict.registerButton}
+                    </button>
+                </form>
+                {submitMessage && <p className="mt-4 text-center text-lg">{submitMessage}</p>}
+            </div>
         </div>
     )
 }

@@ -75,12 +75,12 @@ function PaymentForm({ onSuccess, onError, lang, dict }: { onSuccess: () => void
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <PaymentElement />
+        <form onSubmit={handleSubmit} className="space-y-6">
+            <PaymentElement className="mb-6" />
             <button
                 type="submit"
                 disabled={isProcessing || !stripe || !elements}
-                className="mt-4 bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 disabled:bg-blue-300"
+                className="w-full bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition duration-200 disabled:bg-gray-400"
             >
                 {isProcessing ? dict.processing : dict.pay}
             </button>
@@ -198,43 +198,46 @@ export default function Payment({ params: { lang, id } }: { params: { lang: stri
     }
 
     if (error) {
-        return <div className="text-red-500">{error}</div>;
+        return <div className="text-red-500 text-center">{error}</div>;
     }
 
     return (
-        <div className="min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-            <h1 className="text-3xl font-bold mb-4">{dict.paymentTitle}</h1>
-            {productInfo && priceInfo && (
-                <>
-                    <h2 className="text-2xl font-semibold mb-2">{productInfo.name}</h2>
-                    <p className="mb-4">{productInfo.description}</p>
-                    <p className="text-xl font-bold mb-2">
-                        {dict.price}: {priceInfo.currentPrice.amount} {productInfo.currency}
-                    </p>
-                    <p className="mb-2">
-                        {priceInfo.currentPrice.remaining} {dict.leftAtCurrentPrice}
-                    </p>
-                    {priceInfo.nextPrice && (
-                        <p className="mb-4">
-                            {dict.nextPrice}: {priceInfo.nextPrice.amount} {productInfo.currency}
+        <div className="min-h-screen bg-white pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mx-auto">
+                <h1 className="text-5xl font-extrabold text-gray-900 mb-4 leading-tight">{dict.paymentTitle}</h1>
+                <div className="w-20 h-1 bg-black mb-8"></div>
+                {productInfo && priceInfo && (
+                    <div className="mb-8 space-y-4">
+                        <h2 className="text-2xl font-semibold text-gray-900">{productInfo.name}</h2>
+                        <p className="text-gray-700">{productInfo.description}</p>
+                        <p className="text-xl font-bold text-gray-900">
+                            {dict.price}: {priceInfo.currentPrice.amount} {productInfo.currency}
                         </p>
-                    )}
-                </>
-            )}
-            <p className="mb-4">{dict.paymentDescription}</p>
-            {clientSecret && stripeLoaded ? (
-                <Elements stripe={stripePromise} options={{ clientSecret }}>
-                    <PaymentForm onSuccess={handlePaymentSuccess} onError={handlePaymentError} lang={lang} dict={dict} />
-                </Elements>
-            ) : (
-                <div>
-                    {error ? (
-                        <div className="text-red-500">{error}</div>
-                    ) : (
-                        <div>Loading payment form...</div>
-                    )}
-                </div>
-            )}
+                        <p className="text-gray-700">
+                            {priceInfo.currentPrice.remaining} {dict.leftAtCurrentPrice}
+                        </p>
+                        {priceInfo.nextPrice && (
+                            <p className="text-gray-700">
+                                {dict.nextPrice}: {priceInfo.nextPrice.amount} {productInfo.currency}
+                            </p>
+                        )}
+                    </div>
+                )}
+                <p className="mb-8 text-gray-700">{dict.paymentDescription}</p>
+                {clientSecret && stripeLoaded ? (
+                    <Elements stripe={stripePromise} options={{ clientSecret }}>
+                        <PaymentForm onSuccess={handlePaymentSuccess} onError={handlePaymentError} lang={lang} dict={dict} />
+                    </Elements>
+                ) : (
+                    <div className="text-center text-gray-700">
+                        {error ? (
+                            <div className="text-red-500">{error}</div>
+                        ) : (
+                            <div>{dict.loading}</div>
+                        )}
+                    </div>
+                )}
+            </div>
         </div>
     )
 }

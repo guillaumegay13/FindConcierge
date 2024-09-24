@@ -47,29 +47,38 @@ export default function Search({ params: { lang } }: { params: { lang: 'en' | 'f
     }, [searchQuery])
 
     return (
-        <div className="min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-            <h1 className="text-3xl font-bold mb-4">{dict.searchTitle}</h1>
-            <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={dict.searchPlaceholder}
-                className="w-full p-2 border rounded mb-4"
-            />
-            {isLoading && <p>{dict.loading}</p>}
-            {!isLoading && results.length === 0 && searchQuery && <p>{dict.noResults}</p>}
-            <div>
-                {results.map((concierge: Concierge) => (
-                    <div key={concierge._id} className="border p-4 mb-2 rounded">
-                        <h2 className="font-bold">
-                            <Link href={`/${lang}/concierge/${concierge._id}`} className="text-blue-500 hover:underline">
-                                {concierge.businessName}
-                            </Link>
-                        </h2>
-                        <p>{dict.location}: {concierge.location?.map(loc => loc[lang as 'en' | 'fr'])?.join(', ') || dict.notAvailable}</p>
-                        <p>{dict.services}: {concierge.services?.map(service => dict[service.en as keyof Dictionary] || service.en)?.join(', ') || dict.notAvailable}</p>
-                    </div>
-                ))}
+        <div className="min-h-screen bg-white pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mx-auto">
+                <h1 className="text-5xl font-extrabold text-gray-900 mb-4 leading-tight">{dict.searchTitle}</h1>
+                <div className="w-20 h-1 bg-black mb-8"></div>
+                <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder={dict.searchPlaceholder}
+                    className="w-full p-4 border border-gray-300 rounded-lg mb-8 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
+                />
+                {isLoading && <p className="text-gray-700 text-lg">{dict.loading}</p>}
+                {!isLoading && results.length === 0 && searchQuery && (
+                    <p className="text-gray-700 text-lg">{dict.noResults}</p>
+                )}
+                <div className="space-y-6">
+                    {results.map((concierge: Concierge) => (
+                        <div key={concierge._id} className="border border-gray-200 p-6 rounded-lg hover:shadow-md transition duration-300">
+                            <h2 className="text-2xl font-bold mb-2">
+                                <Link href={`/${lang}/concierge/${concierge._id}`} className="text-black hover:underline">
+                                    {concierge.businessName}
+                                </Link>
+                            </h2>
+                            <p className="text-gray-700 mb-1">
+                                <span className="font-medium">{dict.location}:</span> {concierge.location?.map(loc => loc[lang as 'en' | 'fr'])?.join(', ') || dict.notAvailable}
+                            </p>
+                            <p className="text-gray-700">
+                                <span className="font-medium">{dict.services}:</span> {concierge.services?.map(service => dict[service.en as keyof Dictionary] || service.en)?.join(', ') || dict.notAvailable}
+                            </p>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     )
