@@ -85,5 +85,14 @@
     "conciergeContent3": "Join our network of trusted concierges and expand your clientele today.",
     "contactUs": "Contact Us",
     "contactDescription": "For any questions or to contact us, please use the email address below.",
-    "resources": "Resources"
+    "resources": "Resources",
+    "createArticle": "Create Article",
+    "titlePlaceholder": "Title",
+    "contentPlaceholder": "Content",
+    "authorPlaceholder": "Author",
+    "publishedDate": "Published Date",
+    "publishedDatePlaceholder": "Published Date",
+    "createArticleButton": "Submit",
+    "articleCreatedSuccess": "Article created successfully",
+    "articleCreationError": "Article creation failed"
 }

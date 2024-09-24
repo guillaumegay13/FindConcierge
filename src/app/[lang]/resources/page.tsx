@@ -11,11 +11,13 @@ type Article = {
     publishedDate: string;
 };
 
-type ResourcesProps = {
-    lang: string;
-};
+interface ResourcesProps {
+    params: {
+        lang: string;
+    };
+}
 
-const Resources = ({ lang }: ResourcesProps) => {
+const Resources: React.FC<ResourcesProps> = ({ params: { lang } }) => {
     const [articles, setArticles] = useState<Article[]>([]);
 
     useEffect(() => {
@@ -30,11 +32,11 @@ const Resources = ({ lang }: ResourcesProps) => {
 
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold text-gray-900">Resources</h1>
+            <h1 className="text-3xl font-bold text-gray-900">Articles</h1>
             <ul className="mt-6 space-y-4">
                 {articles.map((article) => (
                     <li key={article._id} className="border-b pb-4">
-                        <Link href={`/${lang}/resources/${article._id}`}>
+                        <Link href={`/${lang}/articles/${article._id}`}>
                             <a className="text-xl font-semibold text-blue-600 hover:underline">
                                 {article.title}
                             </a>
@@ -48,4 +50,5 @@ const Resources = ({ lang }: ResourcesProps) => {
     );
 };
 
+// Ensure the component is exported as default
 export default Resources;

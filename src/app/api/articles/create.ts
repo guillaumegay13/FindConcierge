@@ -1,35 +1,15 @@
-import { NextResponse } from 'next/server';
+import { NextApiRequest, NextApiResponse } from 'next';
 import clientPromise from '../../lib/mongodb';
-import Article from '../../components/Article';
 
-export async function POST(request: Request) {
-    try {
-        const body = await request.json();
-        const { title, content, author, publishedDate } = body;
+export default async function createArticle(req: NextApiRequest, res: NextApiResponse) {
+    const client = await clientPromise;
+    const db = client.db("conciergeRepository");
 
-        // Validate the input
-        if (!title || !content || !author || !publishedDate) {
-            return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
-        }
+    // Extract article data from the request body
+    const articleData = req.body;
 
-        // Connect to the database
-        const client = await clientPromise;
-        const db = client.db("conciergeRepository");
+    // Use the db variable to create a new article
+    await db.collection('articles').insertOne(articleData);
 
-        // Create a new article
-        const newArticle = new Article({
-            title,
-            content,
-            author,
-            publishedDate: new Date(publishedDate)
-        });
-
-        // Save the article to the database
-        await newArticle.save();
-
-        return NextResponse.json({ message: 'Article created successfully' }, { status: 201 });
-    } catch (error) {
-        console.error('Error creating article:', error);
-        return NextResponse.json({ message: 'Error creating article', error: error instanceof Error ? error.message : String(error) }, { status: 500 });
-    }
+    res.status(201).json({ message: 'Article created successfully' });
 }

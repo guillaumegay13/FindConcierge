@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { getDictionary } from '../../../dictionaries'
 import { Dictionary } from '../../../dictionaries'
+import Head from 'next/head'
 
 interface MultilingualItem {
     en: string;
@@ -10,7 +11,7 @@ interface MultilingualItem {
 }
 
 interface Concierge {
-    businessName: string;
+    name: string;
     location: MultilingualItem[];
     services: MultilingualItem[];
     description: string;
@@ -56,34 +57,48 @@ export default function ConciergePage({ params: { lang, id } }: { params: { lang
     }
 
     return (
-        <div className="min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-            <h1 className="text-3xl font-bold mb-4">{concierge.businessName}</h1>
-            <p><strong>{getText('location')}:</strong> {concierge.location.map(loc => getLocalizedText(loc)).join(', ')}</p>
-            <p><strong>{getText('services')}:</strong> {concierge.services.map(service => getLocalizedText(service)).join(', ')}</p>
-            <p className="mt-4">{concierge.description}</p>
+        <div className="min-h-screen bg-white pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+            <Head>
+                <title>{concierge.name}</title>
+            </Head>
+            <div className="max-w-3xl mx-auto">
+                <h1 className="text-5xl font-extrabold text-gray-900 mb-4 leading-tight">{concierge.name}</h1>
+                <div className="w-20 h-1 bg-black mb-8"></div>
+                <p className="text-xl text-gray-700 mb-4">
+                    <strong>{getText('location')}:</strong> {concierge.location.map(loc => getLocalizedText(loc)).join(', ')}
+                </p>
+                <p className="text-xl text-gray-700 mb-4">
+                    <strong>{getText('services')}:</strong> {concierge.services.map(service => getLocalizedText(service)).join(', ')}
+                </p>
+                <p className="text-xl text-gray-700 mb-12 leading-relaxed">{concierge.description}</p>
 
-            <button
-                onClick={() => setShowContact(!showContact)}
-                className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-            >
-                {showContact ? getText('hideContact') : getText('viewContact')}
-            </button>
+                <button
+                    onClick={() => setShowContact(!showContact)}
+                    className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition duration-300"
+                >
+                    {showContact ? getText('hideContact') : getText('viewContact')}
+                </button>
 
-            {showContact && (
-                <div className="mt-4 p-4 bg-gray-800 rounded">
-                    <h2 className="text-xl font-bold mb-2 text-white">{getText('contactInfo')}</h2>
-                    <p className="text-gray-300"><strong className="text-white">{getText('email')}:</strong> {concierge.email}</p>
-                    <p className="text-gray-300"><strong className="text-white">{getText('phone')}:</strong> {concierge.phone}</p>
-                    {concierge.website && (
-                        <p className="text-gray-300">
-                            <strong className="text-white">{getText('websitePlaceholder')}:</strong>
-                            <a href={concierge.website} target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 ml-1">
-                                {concierge.website}
-                            </a>
+                {showContact && (
+                    <div className="mt-8 p-6 bg-gray-100 rounded-lg">
+                        <h2 className="text-2xl font-bold mb-4 text-gray-900">{getText('contactInfo')}</h2>
+                        <p className="text-gray-700 mb-2">
+                            <strong className="text-gray-900">{getText('email')}:</strong> {concierge.email}
                         </p>
-                    )}
-                </div>
-            )}
+                        <p className="text-gray-700 mb-2">
+                            <strong className="text-gray-900">{getText('phone')}:</strong> {concierge.phone}
+                        </p>
+                        {concierge.website && (
+                            <p className="text-gray-700">
+                                <strong className="text-gray-900">{getText('websitePlaceholder')}:</strong>
+                                <a href={concierge.website} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-400 ml-1">
+                                    {concierge.website}
+                                </a>
+                            </p>
+                        )}
+                    </div>
+                )}
+            </div>
         </div>
     )
 }

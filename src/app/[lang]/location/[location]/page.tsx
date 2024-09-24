@@ -2,6 +2,7 @@ import { getDictionary } from '../../../dictionaries';
 import { notFound } from 'next/navigation';
 import { LOCATIONS, Location, capitalizeLocation } from '../../../../constants/locations';
 import type { Metadata } from 'next';
+import Head from 'next/head';
 
 export async function generateStaticParams() {
     return LOCATIONS.map(location => ({ location }));
@@ -30,12 +31,20 @@ export default async function LocationPage({ params: { lang, location } }: { par
     const capitalizedLocation = capitalizeLocation(location);
 
     return (
-        <div className="min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-            <h1 className="text-4xl font-bold mb-4">{dict.conciergerieIn} {capitalizedLocation}</h1>
-            <p className="text-xl mb-6">
-                {dict.discoverBestConciergeServices} {capitalizedLocation} {dict.forYourAirbnb}
-            </p>
-            {/* Add more city-specific content here */}
+        <div className="min-h-screen bg-white pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+            <Head>
+                <title>{`${dict.conciergerieIn} ${capitalizedLocation} | ${dict.servicesForAirbnb}`}</title>
+            </Head>
+            <div className="max-w-3xl mx-auto">
+                <h1 className="text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
+                    {dict.conciergerieIn} {capitalizedLocation}
+                </h1>
+                <div className="w-20 h-1 bg-black mb-8"></div>
+                <p className="text-xl text-gray-700 mb-12 leading-relaxed">
+                    {dict.discoverBestConciergeServices} {capitalizedLocation} {dict.forYourAirbnb}
+                </p>
+                {/* Add more city-specific content here */}
+            </div>
         </div>
     );
 }

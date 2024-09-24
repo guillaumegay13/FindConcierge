@@ -88,11 +88,26 @@ export type Dictionary = {
     contactUs: string
     contactDescription: string
     resources: string
+    createArticle: string
+    titlePlaceholder: string
+    contentPlaceholder: string
+    authorPlaceholder: string
+    publishedDate: string
+    createArticleButton: string
+    articleCreatedSuccess: string
+    articleCreationError: string
+    publishedDatePlaceholder: string
 }
 
 const dictionaries = {
-    en: () => import('./dictionaries/en.json').then((module) => module.default) as Promise<Dictionary>,
-    fr: () => import('./dictionaries/fr.json').then((module) => module.default) as Promise<Dictionary>,
+    en: () => import('./dictionaries/en.json').then((module) => module.default),
+    fr: () => import('./dictionaries/fr.json').then((module) => module.default),
 }
 
-export const getDictionary = cache(async (locale: string) => dictionaries[locale as 'en' | 'fr']())
+export const getDictionary = cache(async (locale: string) => {
+    const dictionaryLoader = dictionaries[locale as 'en' | 'fr'];
+    if (!dictionaryLoader) {
+        throw new Error(`No dictionary found for locale: ${locale}`);
+    }
+    return dictionaryLoader();
+})

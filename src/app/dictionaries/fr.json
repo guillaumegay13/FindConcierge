@@ -85,5 +85,14 @@
     "conciergeContent3": "Rejoignez notre réseau de conciergeries de confiance et élargissez votre clientèle dès aujourd'hui.",
     "contactUs": "Contactez-nous",
     "contactDescription": "Pour toute question ou pour nous contacter, veuillez utiliser l'adresse e-mail ci-dessous.",
-    "resources": "Ressources"
+    "resources": "Ressources",
+    "createArticle": "Créer un Article",
+    "titlePlaceholder": "Titre",
+    "contentPlaceholder": "Contenu",
+    "authorPlaceholder": "Auteur",
+    "publishedDate": "Date de publication",
+    "publishedDatePlaceholder": "Date de publication",
+    "createArticleButton": "Envoyer",
+    "articleCreatedSuccess": "Article créé avec succès",
+    "articleCreationError": "Impossible de créer l'article"
 }
