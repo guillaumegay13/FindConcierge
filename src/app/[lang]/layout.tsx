@@ -27,7 +27,7 @@ export default async function RootLayout({
         <html lang={params.lang} suppressHydrationWarning>
             <body className="bg-white dark:bg-gray-900 text-black dark:text-white transition-colors duration-300">
                 <ClientLayout>
-                    <Navigation lang={params.lang} dict={{ home: dict.home, search: dict.searchButton, registerConcierge: dict.registerButton, about: dict.about }} />
+                    <Navigation lang={params.lang} dict={{ home: dict.home, search: dict.searchButton, registerConcierge: dict.registerButton, about: dict.about, resources: dict.resources }} />
                     {children}
                 </ClientLayout>
                 <Analytics />

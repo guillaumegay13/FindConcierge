@@ -9,6 +9,7 @@ type NavigationProps = {
         search: string
         registerConcierge: string
         about: string
+        resources: string
     }
 }
 
@@ -22,12 +23,15 @@ export default function Navigation({ lang, dict }: NavigationProps) {
                             Logo
                         </Link>
                     </div>
-                    <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
+                    <div className="sm:ml-6 sm:flex sm:space-x-8">
                         <Link href={`/${lang}`} className="text-gray-900 hover:text-gray-700 px-3 py-2 text-sm font-medium">
                             {dict.home}
                         </Link>
                         <Link href={`/${lang}/search`} className="text-gray-900 hover:text-gray-700 px-3 py-2 text-sm font-medium">
                             {dict.search}
+                        </Link>
+                        <Link href={`/${lang}/resources`} className="text-gray-900 hover:text-gray-700 px-3 py-2 text-sm font-medium">
+                            {dict.resources}
                         </Link>
                         <Link href={`/${lang}/about`} className="text-gray-900 hover:text-gray-700 px-3 py-2 text-sm font-medium">
                             {dict.about}

@@ -87,6 +87,7 @@ export type Dictionary = {
     conciergeContent3: string
     contactUs: string
     contactDescription: string
+    resources: string
 }
 
 const dictionaries = {
