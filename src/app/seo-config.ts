@@ -7,7 +7,7 @@ const SEO: DefaultSeoProps = {
     openGraph: {
         type: 'website',
         locale: 'fr_FR',
-        url: 'https://www.votresite.com/',
+        url: 'https://conciergerielocationcourte.fr/',
         siteName: 'Répertoire de Conciergerie France',
     },
     additionalMetaTags: [
